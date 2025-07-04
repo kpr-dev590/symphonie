@@ -47,7 +47,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 300px;
+  max-width: 330px;
   height: 50px;
 }
 
@@ -147,7 +147,7 @@ body {
   margin-top: 8px;
   margin-bottom: 15px;
   width: 100%;
-  max-width: 300px;
+  max-width: 330px;
 }
 #seekBar {
   flex-grow: 1;
@@ -273,6 +273,12 @@ body {
   color: white;
   transform: none;
 }
+#repeatBtn {
+  position: relative;
+}
+.playback-controls button.repeat-active {
+  color: #17a2b8;
+}
 
 #vizToggleBtn {
   width: 20px; /* MODIFIED: Smaller width */
@@ -289,9 +295,7 @@ body {
 #vizToggleBtn.active {
   color: #17a2b8;
   border-color: #17a2b8;
-  text-shadow: 0 0 3px #17a2b8,
-    /* Adjusted glow for smaller text */ 0 0 6px #17a2b8,
-    0 1px 1px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 3px #17a2b8, 0 0 6px #17a2b8, 0 1px 1px rgba(0, 0, 0, 0.3);
   background-color: #303030;
   background-image: none;
   transform: none;
