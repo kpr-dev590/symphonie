@@ -4,9 +4,10 @@ const path = require("path");
 const Store = require("electron-store");
 const fs = require("fs");
 
-// Disable GPU to avoid Chromium errors on Linux (e.g., in WSL or minimal environments)
+// Disable GPU to avoid Chromium errors on Linux 
 app.commandLine.appendSwitch("disable-gpu");
 app.commandLine.appendSwitch("disable-software-rasterizer");
+app.commandLine.appendSwitch("disable-features", "VaapiVideoDecoder");
 
 const store = new Store({
   defaults: {
@@ -357,24 +358,27 @@ ipcMain.on(
   "set-main-window-size-and-visibility",
   (event, newWidthIgnored, heightOption, isPlaylistNowVisible) => {
     if (mainWindow) {
+      /* PLinux-Specific Height Adjustment  */
+      // Some Linux window managers calculate window decorations/chrome differently,
+      // leading to a slightly taller window for the same content height.
+      // This adjustment compensates for that discrepancy, applying the fix only on Linux.
+      const platformHeightAdjustment = process.platform === 'linux' ? -22 : 0;
+
       let targetWindowHeight;
       if (isPlaylistNowVisible) {
         // If playlist is to be shown
         targetWindowHeight =
-          MAIN_PLAYER_CONTENT_HEIGHT + DOCKED_PLAYLIST_AREA_HEIGHT;
-        mainWindow.setMinimumSize(PLAYER_FIXED_WIDTH, targetWindowHeight); // Set min/max for the taller state
+          MAIN_PLAYER_CONTENT_HEIGHT + DOCKED_PLAYLIST_AREA_HEIGHT + platformHeightAdjustment; 
+        mainWindow.setMinimumSize(PLAYER_FIXED_WIDTH, targetWindowHeight);
         mainWindow.setMaximumSize(PLAYER_FIXED_WIDTH, targetWindowHeight);
       } else {
         // Playlist is to be hidden
-        targetWindowHeight = MAIN_PLAYER_CONTENT_HEIGHT;
-        mainWindow.setMinimumSize(PLAYER_FIXED_WIDTH, targetWindowHeight); // Set min/max for the shorter state
+        targetWindowHeight = MAIN_PLAYER_CONTENT_HEIGHT + platformHeightAdjustment;
+        mainWindow.setMinimumSize(PLAYER_FIXED_WIDTH, targetWindowHeight);
         mainWindow.setMaximumSize(PLAYER_FIXED_WIDTH, targetWindowHeight);
       }
-      /*  console.log(
-        "Main IPC: Calculated targetWindowHeight:",
-        targetWindowHeight
-      ); */
-      mainWindow.setSize(PLAYER_FIXED_WIDTH, targetWindowHeight, false); // Set the actual size
+      
+      mainWindow.setSize(PLAYER_FIXED_WIDTH, targetWindowHeight, false);
       store.set("playlistVisible", isPlaylistNowVisible);
     }
   }
