@@ -26,7 +26,7 @@
     "executableName": "Symphonie",
     "copyright": "Copyright © ${new Date().getFullYear()} Rakesh KP",
     "asar": true,
-    "compression": "maximum",
+    "compression": "normal",
     "directories": {
       "output": "dist_electron",
       "buildResources": "assets/icons"
@@ -137,21 +137,20 @@
       "category": "public.app-category.music",
       "target": ["dmg", "zip"]
     },
-    "linux": {
-      "icon": "linux",
-      "category": "Audio",
-      "target": ["AppImage"],
-      "maintainer": "Rakesh KP <rakeshkpk@gmail.com>",
-      "description": "A simple music player built with Electron.",
-      "compression": "store",
-      "desktop": {
-        "Name": "Symphonie",
-        "GenericName": "Music Player",
-        "Comment": "Play your local audio library with Symphonie.",
-        "Keywords": "music;audio;player;mp3;flac;aac;ogg;wav;opus;symphonie;",
-        "StartupNotify": "true",
-        "MimeType": "audio/mpeg;audio/mp4;audio/aac;audio/wav;audio/ogg;audio/x-flac;audio/flac;audio/opus;"
-      }
+  "linux": {
+  "icon": "linux",
+  "category": "AudioVideo",
+  "target": ["AppImage","tar.gz"],
+  "maintainer": "Rakesh KP <rakeshkpk@gmail.com>",
+  "description": "A simple music player built with Electron.",
+    "desktop": {
+    "Name": "Symphonie",
+    "GenericName": "Music Player",
+    "Comment": "Play your local audio library with Symphonie.",
+    "Keywords": "music;audio;player;mp3;flac;aac;ogg;wav;opus;symphonie;",
+    "StartupNotify": "true",
+    "MimeType": "audio/mpeg;audio/mp4;audio/aac;audio/wav;audio/ogg;audio/x-flac;audio/flac;audio/opus;"
     }
+   } 
   }
 }
