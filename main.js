@@ -237,6 +237,12 @@ ipcMain.handle("dialog:openFiles", async () => {
 
 ipcMain.handle("get-audio-metadata", async (event, filePath) => {
   try {
+    
+    // Add a rock-solid guard to ensure we only ever process files.
+    if (!fs.statSync(filePath).isFile()) {
+      //console.error(`Main: Attempted to get metadata for a directory, not a file: ${filePath}`);
+      return null;
+    }
     const { parseFile } = await import("music-metadata");
     const metadata = await parseFile(filePath, {
       duration: true,
