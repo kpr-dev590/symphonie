@@ -32,7 +32,7 @@ Your personal, lightweight music player for enjoying your local audio collection
 
 ## 💻 Supported Operating Systems
 
-* Primarily designed and tested for **Windows 10**, **Windows 11**, and **Ubuntu 22.04/24.04+**.
+* Primarily designed and tested for **Windows 10**, **Windows 11**, and **Ubuntu 22.04/24.04+**,**Arch Linux.**
 * It *may* work on other Linux distributions, but only `.deb` and AppImage are officially provided for now.
 * Older versions of Windows (like Windows 8.1) may work but are not officially supported. **Windows 7 is not supported.**
 
@@ -46,11 +46,11 @@ Your personal, lightweight music player for enjoying your local audio collection
 
 > ⚠️ Since the app is unsigned, SmartScreen or antivirus may show a warning. Click "More info" > "Run anyway".
 
-## 🐖 Installation / Getting Started (Linux - Ubuntu/Debian)
+## 🐖 Installation / Getting Started (Linux - Ubuntu/Debian/Arch)
 
-**Option 1: Using **\`\`** package**
+**Option 1: Using **``** package (.deb)**
 
-1. Download the `.deb` file: `symphonie_1.0.x_amd64.deb`
+1. Download the `.deb` file: `symphonie_1.0.x_amd64.deb`  
 2. Install it:
 
 ```bash
@@ -67,17 +67,16 @@ symphonie
 > If the above doesn’t work, launch manually with:
 
 ```bash
-/opt/Symphonie/Symphonie
+/opt/symphonie/Symphonie %U
 
 or
 
-/opt/Symphonie/Symphonie 2>/dev/null (to supress warnings/errors)
-
+/opt/symphonie/Symphonie %U 2>/dev/null  (to supress warnings/errors)
 ```
 
 **Option 2: Using AppImage (Works on most Linux distros)**
 
-1. Download the file: `Symphonie-1.0.x.AppImage`
+1. Download the file: `Symphonie-1.0.x.AppImage`  
 2. Make it executable:
 
 ```bash
@@ -91,6 +90,38 @@ chmod +x Symphonie-1.0.x.AppImage
 ```
 
 > 💡 The AppImage includes all dependencies. Recommended if you face any issues with `.deb`.
+
+**Option 3: Using AUR (Arch/Manjaro and other Arch-based distros)**
+
+1. Install using an AUR helper like `yay`:
+
+```bash
+yay -S symphonie-bin
+```
+
+2. Launch the app:
+
+```bash
+symphonie
+```
+
+> If the above doesn’t work, launch manually with:
+
+```bash
+/opt/symphonie/Symphonie %U
+
+or
+
+/opt/symphonie/Symphonie %U 2>/dev/null  (to supress warnings/errors)
+```
+
+> If you prefer manual AUR installation:
+
+```bash
+git clone https://aur.archlinux.org/symphonie-bin.git
+cd symphonie-bin
+makepkg -si
+```
 
 ## 🎵 How to Use
 
