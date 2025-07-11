@@ -36,7 +36,7 @@ Your personal, lightweight music player for enjoying your local audio collection
 * It *may* work on other Linux distributions, but only `.deb` and AppImage are officially provided for now.
 * Older versions of Windows (like Windows 8.1) may work but are not officially supported. **Windows 7 is not supported.**
 
-## 🚀 Installation / Getting Started (Windows)
+## 🪟 Installation / Getting Started (Windows)
 
 **\[Installer]**
 
@@ -46,7 +46,7 @@ Your personal, lightweight music player for enjoying your local audio collection
 
 > ⚠️ Since the app is unsigned, SmartScreen or antivirus may show a warning. Click "More info" > "Run anyway".
 
-## 🐖 Installation / Getting Started (Linux - Ubuntu/Debian/Arch)
+## 🐧 Installation / Getting Started (Linux - Ubuntu/Debian/Arch)
 
 **Option 1: Using **``** package (.deb)**
 
