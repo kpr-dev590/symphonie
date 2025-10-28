@@ -1,6 +1,6 @@
 {
   "name": "symphonie",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "description": "A simple music player built with Electron.",
   "main": "main.js",
   "author": "Rakesh KP <rakeshkpk@gmail.com>",
@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "electron-store": "^7.0.3",
-    "music-metadata": "^11.2.3"
+    "music-metadata": "^11.6.0"
   },
   "devDependencies": {
     "electron": "^28.3.3",
-    "electron-builder": "^24.9.1"
+    "electron-builder": "^24.13.3"
   },
   "build": {
     "appId": "com.rakeshkp.symphonie",
@@ -140,7 +140,7 @@
   "linux": {
   "icon": "linux",
   "category": "AudioVideo",
-  "target": ["AppImage","tar.gz"],
+  "target": ["AppImage","tar.gz","deb"],
   "maintainer": "Rakesh KP <rakeshkpk@gmail.com>",
   "description": "A simple music player built with Electron.",
     "desktop": {
