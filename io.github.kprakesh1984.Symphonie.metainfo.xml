@@ -24,13 +24,12 @@
   
   <screenshots>
     <screenshot type="default">
-      <!-- You need to host a screenshot image somewhere (like GitHub) and put the link here -->
       <image>https://raw.githubusercontent.com/kpr-dev590/symphonie/e286558b1a777a62769498512abeba91fa49ea0a/Symphonie.jpg</image>
     </screenshot>
   </screenshots>
   
   <releases>
-    <release version="1.0.17" date="2025-12-24" />
+    <release version="1.0.21" date="2026-02-05" />
   </releases>
   
   <url type="homepage">https://github.com/kprakesh1984/symphonie</url>
