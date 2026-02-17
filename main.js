@@ -4,7 +4,11 @@ const path = require("path");
 const Store = require("electron-store");
 const fs = require("fs");
 
-// Disable GPU to avoid Chromium errors on Linux 
+// Set scale factor to 1 on Windows to avoid blurry UI due to DPI scaling issues
+if (process.platform === "win32") {
+  app.commandLine.appendSwitch("force-device-scale-factor", "1");
+}
+// Disable GPU to avoid Chromium errors on Linux
 app.commandLine.appendSwitch("disable-gpu");
 app.commandLine.appendSwitch("disable-software-rasterizer");
 app.commandLine.appendSwitch("disable-features", "VaapiVideoDecoder");
@@ -171,7 +175,7 @@ function createMainWindow() {
     if (mainWindow && mainWindow.webContents && !mainWindow.isDestroyed()) {
       mainWindow.webContents.send(
         "set-initial-playlist-visibility",
-        lastPlaylistVisibleState
+        lastPlaylistVisibleState,
       );
       mainWindow.webContents.send("set-initial-volume", lastVolumeState);
       let filesToProcessNow = [...filesToOpenOnReady];
@@ -184,8 +188,8 @@ function createMainWindow() {
           !arg.startsWith("--") &&
           arg !== "." &&
           [".mp3", ".m4a", ".aac", ".wav", ".ogg", ".flac", ".opus"].includes(
-            path.extname(arg).toLowerCase()
-          )
+            path.extname(arg).toLowerCase(),
+          ),
       );
       if (filePathFromArg && !filesToProcessNow.includes(filePathFromArg))
         filesToProcessNow.push(filePathFromArg);
@@ -193,7 +197,7 @@ function createMainWindow() {
         filesToProcessNow.forEach((fp) => {
           if (
             [".mp3", ".m4a", ".aac", ".wav", ".ogg", ".flac", ".opus"].includes(
-              path.extname(fp).toLowerCase()
+              path.extname(fp).toLowerCase(),
             )
           ) {
             try {
@@ -237,7 +241,6 @@ ipcMain.handle("dialog:openFiles", async () => {
 
 ipcMain.handle("get-audio-metadata", async (event, filePath) => {
   try {
-    
     // Add a rock-solid guard to ensure we only ever process files.
     if (!fs.statSync(filePath).isFile()) {
       //console.error(`Main: Attempted to get metadata for a directory, not a file: ${filePath}`);
@@ -280,7 +283,7 @@ ipcMain.handle("get-audio-metadata", async (event, filePath) => {
   } catch (error) {
     console.error(
       `Main: Error parsing metadata for ${filePath}:`,
-      error.message
+      error.message,
     );
     return null;
   }
@@ -327,7 +330,7 @@ ipcMain.handle("read-dropped-folder", async (event, folderPath) => {
     readDirectory(folderPath); // Start recursive read
   } else {
     console.warn(
-      `Main: Dropped path is not a valid directory or does not exist: ${folderPath}`
+      `Main: Dropped path is not a valid directory or does not exist: ${folderPath}`,
     );
   }
 
@@ -352,12 +355,12 @@ ipcMain.on(
           event.sender.send(
             "context-menu-command",
             "remove-tracks",
-            selectedIndices
+            selectedIndices,
           ),
       },
     ]);
     menu.popup({ window: senderWindow });
-  }
+  },
 );
 
 ipcMain.on(
@@ -368,26 +371,29 @@ ipcMain.on(
       // Some Linux window managers calculate window decorations/chrome differently,
       // leading to a slightly taller window for the same content height.
       // This adjustment compensates for that discrepancy, applying the fix only on Linux.
-      const platformHeightAdjustment = process.platform === 'linux' ? -22 : 0;
+      const platformHeightAdjustment = process.platform === "linux" ? -22 : 0;
 
       let targetWindowHeight;
       if (isPlaylistNowVisible) {
         // If playlist is to be shown
         targetWindowHeight =
-          MAIN_PLAYER_CONTENT_HEIGHT + DOCKED_PLAYLIST_AREA_HEIGHT + platformHeightAdjustment; 
+          MAIN_PLAYER_CONTENT_HEIGHT +
+          DOCKED_PLAYLIST_AREA_HEIGHT +
+          platformHeightAdjustment;
         mainWindow.setMinimumSize(PLAYER_FIXED_WIDTH, targetWindowHeight);
         mainWindow.setMaximumSize(PLAYER_FIXED_WIDTH, targetWindowHeight);
       } else {
         // Playlist is to be hidden
-        targetWindowHeight = MAIN_PLAYER_CONTENT_HEIGHT + platformHeightAdjustment;
+        targetWindowHeight =
+          MAIN_PLAYER_CONTENT_HEIGHT + platformHeightAdjustment;
         mainWindow.setMinimumSize(PLAYER_FIXED_WIDTH, targetWindowHeight);
         mainWindow.setMaximumSize(PLAYER_FIXED_WIDTH, targetWindowHeight);
       }
-      
+
       mainWindow.setSize(PLAYER_FIXED_WIDTH, targetWindowHeight, false);
       store.set("playlistVisible", isPlaylistNowVisible);
     }
-  }
+  },
 );
 
 ipcMain.on("save-volume-state", (event, volume) => {
