@@ -32,7 +32,7 @@ Your personal, lightweight music player for enjoying your local audio collection
 
 ## 💻 Supported Operating Systems
 
-* Primarily designed and tested for **Windows 10**, **Windows 11**, and **Ubuntu 22.04/24.04+**,**Arch Linux.**
+* Primarily designed and tested for **Windows 10**, **Windows 11**, and **Linux.**
 * It *may* work on other Linux distributions, but only `.deb` and AppImage are officially provided for now.
 * Older versions of Windows (like Windows 8.1) may work but are not officially supported. **Windows 7 is not supported.**
 
